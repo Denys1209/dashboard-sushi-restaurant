@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import MySessionProvider from "./Providers/MySessionProvider";
+import DashboardLayout from "./componets/layouts/DashboardLayout";
+import ProtectedLayout from "./componets/layouts/ProtectedLayout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +18,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <MySessionProvider>
+      <ProtectedLayout>
+        <html lang="en" className="w-full h-[100vh]">
+          <body className="w-full h-[100vh]">
+            <DashboardLayout>
+              <div className={inter.className}>{children}</div>
+            </DashboardLayout>
+          </body>
+        </html>
+      </ProtectedLayout>
+    </MySessionProvider >
   );
 }
