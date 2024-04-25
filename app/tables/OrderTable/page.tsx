@@ -8,19 +8,19 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { GetCategoryDto, GetCategoryPageDto } from '@/types/Category'
-import CategoryService from '@/services/CategoryService'
 import { FilterPaginationDto } from '@/types/FilterPagination'
+import CrudContextMenu from "@/app/componets/ButtonForDropdownMenu"
 import { Combox } from '@/components/ui/combox'
 import { ComboxProps } from '@/types/Combox'
 import { PaginationLineProps } from '@/types/PaginationLine'
 import PaginationLine from "@/app/componets/PaginationLine"
 import InputFieldForNumber from "@/app/componets/InputFieldForNumber"
 import { InputFieldForNumberProps } from '@/types/InputFieldForNumberProps'
-import CreateCategoryButton from "./Buttons/CreateCategoryButton"
-import CrudContextMenu from "@/app/componets/ButtonForDropdownMenu"
-import DeleteCategoryButton from "./Buttons/DeleteCategoryButton"
-import UpdateCategoryButton from "./Buttons/UpdateCategoryButton"
+import CreateOrderButton from "./Buttons/CreateOrderButton"
+import OrderService from "@/services/OrderService"
+import { GetOrderPageDto } from "@/types/Order"
+import UpdateOrderButton from "./Buttons/UpdateOrderButton"
+import DeleteOrderButton from "./Buttons/DeleteOrderButton"
 
 const listOfColumn: ComboxProps = {
     listOfValue: [
@@ -29,8 +29,20 @@ const listOfColumn: ComboxProps = {
             value: "id",
         },
         {
-            label: "name",
-            value: "name",
+            label: "userId",
+            value: "userId",
+        },
+        {
+            label: "cost",
+            value: "cost",
+        },
+        {
+            label: "dateTime",
+            value: "dateTime",
+        },
+        {
+            label: "phoneNumber",
+            value: "phoneNumber",
         }
     ],
     placeholder: "select column",
@@ -68,7 +80,7 @@ export default async function Page({ searchParams }: { searchParams: FilterPagin
         searchTerm: searchParams?.searchTerm || '',
         sortColumn: searchParams?.sortColumn || 'id',
     };
-    const page: GetCategoryPageDto = (await CategoryService.getAllCategories(
+    const page: GetOrderPageDto = (await OrderService.getAllOrders(
         filter
     )).data;
 
@@ -90,30 +102,35 @@ export default async function Page({ searchParams }: { searchParams: FilterPagin
                 <InputFieldForNumber
                     props={propsForPageSizeInputField}
                 />
-                <CreateCategoryButton />
+                <CreateOrderButton />
             </div>
-            <div className='overflow-y-scroll overflow-x-hidden flex-grow h-1 flex'>
-                <Table className='bg-black text-white flex-grow h-1  flex-row' >
+            <div className='overflow-y-scroll overflow-x-hidden flex-grow flex h-1'>
+                <Table className='bg-black text-white flex-row flex-grow h-1' >
                     <TableHeader>
                         <TableRow className='grid-cols-3 grid-flow-row' >
                             <TableHead className="text-center">Id</TableHead>
-                            <TableHead className="text-center">Name</TableHead>
+                            <TableHead className="text-center">UserId</TableHead>
+                            <TableHead className="text-center">Cost</TableHead>
+                            <TableHead className="text-center">PhoneNumber</TableHead>
+                            <TableHead className="text-center">DateTime</TableHead>
                             <TableHead className="text-center">Actions</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody className='overflow-scroll '>
-                        {page.categories.map((category) => (
-                            <TableRow key={category.id} className="grid-cols-3" >
-                                <TableCell className="text-center" >{category.id}</TableCell>
-                                <TableCell className="text-center" >{category.name}</TableCell>
+                        {page.orders.map((order) => (
+                            <TableRow key={order.id} className="grid-cols-3" >
+                                <TableCell className="text-center" >{order.id}</TableCell>
+                                <TableCell className="text-center" >{order?.user.id}</TableCell>
+                                <TableCell className="text-center" >{order.cost}</TableCell>
+                                <TableCell className="text-center" >{order.phoneNumber}</TableCell>
+                                <TableCell className="text-center" >{String(order.dateTime)}</TableCell>
                                 <TableCell className="justify-center flex">
-                                    <CrudContextMenu>
-                                        <UpdateCategoryButton
-                                            category={category}
+                                  <CrudContextMenu>
+                                        <UpdateOrderButton
+                                            order={order}
                                         />
-                                        <DeleteCategoryButton
-                                            item={category}
-                                            page={page}
+                                        <DeleteOrderButton
+                                            item={order}
                                         />
                                     </CrudContextMenu>
                                 </TableCell>

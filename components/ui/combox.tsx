@@ -25,7 +25,7 @@ import { useRouter } from "next/navigation"
 export function Combox({ props }: { props: ComboxProps }) {
   const router = useRouter();
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
+  const [label, setLabel] = React.useState("");
 
    const handleUpdateParams = (value: string) => {
         const searchParams = new URLSearchParams(window.location.search);
@@ -47,8 +47,8 @@ export function Combox({ props }: { props: ComboxProps }) {
           aria-expanded={open}
           className="w-[200px] justify-between"
         >
-          {value
-            ? props.listOfValue.find((e) => e.value === value)?.label
+          {label
+            ? props.listOfValue.find((e) => e.label === label)?.label
             : props.placeholder}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
@@ -62,18 +62,18 @@ export function Combox({ props }: { props: ComboxProps }) {
               {props.listOfValue.map((e) => (
                 <CommandItem
                   key={e.value}
-                  value={e.value}
+                  value={e.label}
                   onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue)
-                    handleUpdateParams(currentValue);
-                    setOpen(false)
+                    setLabel(currentValue === label ? "" : currentValue);
+                    handleUpdateParams(e.value);
+                    setOpen(false);
 
                   }}
                 >
                   <Check
                     className={cn(
                       "mr-2 h-4 w-4",
-                      value === e.value ? "opacity-100" : "opacity-0"
+                      label === e.label ? "opacity-100" : "opacity-0"
                     )}
                   />
                   {e.label}

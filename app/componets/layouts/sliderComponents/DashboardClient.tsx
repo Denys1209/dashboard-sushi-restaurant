@@ -1,6 +1,6 @@
 "use client"
 import { Button } from '@/components/ui/button';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 import React from 'react'
 import SliderButton from './SliderButton';
@@ -15,12 +15,16 @@ const listOfUrls = [
     url: "/tables/CategoryTable"
   },
   {
-    text: "Categories",
-    url: "/tables/CategoryTable"
+    text: "Dishes",
+    url: "/tables/DishTable"
   },
   {
-    text: "Categories",
-    url: "/tables/CategoryTable"
+    text: "Users",
+    url: "/tables/UserTable"
+  },
+  {
+    text: "Orders",
+    url: "/tables/OrderTable"
   },
 ]
 
@@ -45,7 +49,7 @@ const DashboardClient: React.FC<DashboardClientProps> = ({ children }) => {
           </div>
 
         </div>
-        <main className={"w-full h-[100vh] "}>
+        <main className={"w-full  h-full"}>
           {children}
         </main>
       </div>

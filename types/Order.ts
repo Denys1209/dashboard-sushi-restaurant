@@ -23,7 +23,13 @@ export interface GetOrderDto {
 export interface UpdateOrderDto {
  id: number;
  cost: number;
- user: GetUserDto; 
+ user?: GetUserDto; 
  phoneNumber: string;
  dateTime: Date;
+}
+
+
+export interface GetOrderPageDto{
+    orders: GetOrderDto[];
+    howManyPages: number;
 }

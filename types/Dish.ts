@@ -13,10 +13,14 @@ export interface GetDishDto extends IDishDto {
 }
 
 export interface CreateDishDto extends IDishDto {
-  categoryId: number;
 }
 
 export interface UpdateDishDto extends IDishDto {
   id: number;
   categoryId: number;
+}
+
+export interface GetDishPageDto{
+    dishes: GetDishDto[];
+    howManyPages: number;
 }

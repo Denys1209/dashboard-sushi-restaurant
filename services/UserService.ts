@@ -2,8 +2,10 @@ import { FilterPaginationDto } from "@/types/FilterPagination";
 import {
   CreateUserDto,
   GetUserDto,
+  GetUserPageDto,
   LoginResponse,
   LoginUserDto,
+  RegisterUserDto,
   UpdateUserDto,
 } from "@/types/User";
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
@@ -18,7 +20,7 @@ class UserService extends Service {
 
   async getAllUsers(
     paginationDto: FilterPaginationDto
-  ): Promise<AxiosResponse<GetUserDto[]>> {
+  ): Promise<AxiosResponse<GetUserPageDto>> {
     return this.axiosInstance.get("", { params: paginationDto });
   }
 
@@ -26,7 +28,7 @@ class UserService extends Service {
     return this.axiosInstance.get(`${id}`);
   }
 
-  async registerUser(model: CreateUserDto): Promise<AxiosResponse> {
+  async registerUser(model: RegisterUserDto): Promise<AxiosResponse> {
     try {
       return await this.axiosInstance.post("registerAdmin", model);
     } catch (error) {

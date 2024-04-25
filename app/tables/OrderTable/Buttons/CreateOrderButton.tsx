@@ -1,8 +1,8 @@
 "use client"
 import React, { useState } from 'react'
-import ModalWindowForCreateCategory from '../ModalWindows/ModalWindowForCreateCategory';
+import ModalWindowForCreateOrder from '../ModalWindows/ModalWindowForCreateOrder';
 
-const CreateCategoryButton = () => {
+const CreateOrderButton = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = () => {
@@ -16,11 +16,11 @@ const CreateCategoryButton = () => {
     return (
         <>
             <button onClick={openModal} className="bg-purple-700 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded">
-                create a new category
+                create a new order
             </button>
-            <ModalWindowForCreateCategory isOpen={isModalOpen} onClose={closeModal} />
+            <ModalWindowForCreateOrder isOpen={isModalOpen} onClose={closeModal} />
         </>
     );
 }
 
-export default CreateCategoryButton
+export default CreateOrderButton

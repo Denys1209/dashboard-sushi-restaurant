@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import Service from './Service';
-import { CreateOrderDto, GetOrderDto, UpdateOrderDto } from '@/types/Order';
+import { CreateOrderDto, GetOrderDto, GetOrderPageDto, UpdateOrderDto } from '@/types/Order';
 import { FilterPaginationDto } from '@/types/FilterPagination';
 
 class OrderService extends Service {
@@ -8,7 +8,7 @@ class OrderService extends Service {
     super("Order/");
  }
 
- async getAllOrders(paginationDto: FilterPaginationDto): Promise<AxiosResponse<GetOrderDto[]>> {
+ async getAllOrders(paginationDto: FilterPaginationDto): Promise<AxiosResponse<GetOrderPageDto>> {
     return this.axiosInstance.get("", { params: paginationDto });
  }
 

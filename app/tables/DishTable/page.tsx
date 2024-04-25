@@ -17,10 +17,12 @@ import { PaginationLineProps } from '@/types/PaginationLine'
 import PaginationLine from "@/app/componets/PaginationLine"
 import InputFieldForNumber from "@/app/componets/InputFieldForNumber"
 import { InputFieldForNumberProps } from '@/types/InputFieldForNumberProps'
-import CreateCategoryButton from "./Buttons/CreateCategoryButton"
 import CrudContextMenu from "@/app/componets/ButtonForDropdownMenu"
-import DeleteCategoryButton from "./Buttons/DeleteCategoryButton"
-import UpdateCategoryButton from "./Buttons/UpdateCategoryButton"
+import CreateDishButton from "./Buttons/CreateDishButton"
+import { GetDishPageDto } from "@/types/Dish"
+import DishService from "@/services/DishService"
+import UpdateDishButton from "./Buttons/UpdateDishButton"
+import DeleteDishButton from "./Buttons/DeleteDishButton"
 
 const listOfColumn: ComboxProps = {
     listOfValue: [
@@ -31,7 +33,15 @@ const listOfColumn: ComboxProps = {
         {
             label: "name",
             value: "name",
-        }
+        },
+        {
+            label: "description",
+            value: "description",
+        },
+        {
+            label: "cost",
+            value: "cost",
+        },
     ],
     placeholder: "select column",
     label: "sortColumn",
@@ -68,7 +78,7 @@ export default async function Page({ searchParams }: { searchParams: FilterPagin
         searchTerm: searchParams?.searchTerm || '',
         sortColumn: searchParams?.sortColumn || 'id',
     };
-    const page: GetCategoryPageDto = (await CategoryService.getAllCategories(
+    const page: GetDishPageDto = (await DishService.getAllDishes(
         filter
     )).data;
 
@@ -90,29 +100,35 @@ export default async function Page({ searchParams }: { searchParams: FilterPagin
                 <InputFieldForNumber
                     props={propsForPageSizeInputField}
                 />
-                <CreateCategoryButton />
+                <CreateDishButton />
             </div>
-            <div className='overflow-y-scroll overflow-x-hidden flex-grow h-1 flex'>
-                <Table className='bg-black text-white flex-grow h-1  flex-row' >
+            <div className='overflow-y-scroll overflow-x-hidden flex-grow flex h-1'>
+                <Table className='bg-black text-white flex-grow h-1 flex-row' >
                     <TableHeader>
                         <TableRow className='grid-cols-3 grid-flow-row' >
                             <TableHead className="text-center">Id</TableHead>
                             <TableHead className="text-center">Name</TableHead>
+                            <TableHead className="text-center">Category</TableHead>
+                            <TableHead className="text-center">Cost</TableHead>
+                            <TableHead className="text-center">Description</TableHead>
                             <TableHead className="text-center">Actions</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody className='overflow-scroll '>
-                        {page.categories.map((category) => (
-                            <TableRow key={category.id} className="grid-cols-3" >
-                                <TableCell className="text-center" >{category.id}</TableCell>
-                                <TableCell className="text-center" >{category.name}</TableCell>
+                        {page.dishes.map((dish) => (
+                            <TableRow key={dish.id} className="grid-cols-3" >
+                                <TableCell className="text-center" >{dish.id}</TableCell>
+                                <TableCell className="text-center" >{dish.name}</TableCell>
+                                <TableCell className="text-center" >{dish.category.name}</TableCell>
+                                <TableCell className="text-center" >{dish.cost}</TableCell>
+                                <TableCell className="text-center" >{dish.description}</TableCell>
                                 <TableCell className="justify-center flex">
                                     <CrudContextMenu>
-                                        <UpdateCategoryButton
-                                            category={category}
+                                        <UpdateDishButton
+                                            dish={dish}
                                         />
-                                        <DeleteCategoryButton
-                                            item={category}
+                                        <DeleteDishButton
+                                            item={dish}
                                             page={page}
                                         />
                                     </CrudContextMenu>

@@ -2,6 +2,7 @@ import { FilterPaginationDto } from "@/types/FilterPagination";
 import {
  CreateDishDto,
  GetDishDto,
+ GetDishPageDto,
  UpdateDishDto,
 } from "@/types/Dish";
 import axios, { AxiosResponse } from "axios";
@@ -15,7 +16,7 @@ class DishService extends Service {
 
  async getAllDishes(
     paginationDto: FilterPaginationDto
-  ): Promise<AxiosResponse<GetDishDto[]>> {
+  ): Promise<AxiosResponse<GetDishPageDto>> {
     return this.axiosInstance.get("", { params: paginationDto });
  }
 
@@ -23,8 +24,8 @@ class DishService extends Service {
     return this.axiosInstance.get(`${id}`);
  }
 
- async createDish(model: CreateDishDto): Promise<AxiosResponse> {
-    return this.axiosInstance.post("", model);
+ async createDish(categoryId:number,model: CreateDishDto): Promise<AxiosResponse> {
+    return this.axiosInstance.post("createDish?categoryId="+String(categoryId), model);
  }
 
  async updateDish(dto: UpdateDishDto): Promise<AxiosResponse> {

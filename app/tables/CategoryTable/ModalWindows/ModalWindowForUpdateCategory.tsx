@@ -1,19 +1,24 @@
 "use client"
 import ModalWindowlayout from '@/app/componets/ModalWindowlayout';
 import CategoryService from '@/services/CategoryService';
+import { GetCategoryDto } from '@/types/Category';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
-const ModalWindowForCreateCategory = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) => {
-    const [name, setName] = useState('');
+const ModalWindowForUpdateCategory = ({ isOpen, onClose, category }: { isOpen: boolean, onClose: () => void, category:GetCategoryDto }) => {
+    const router = useRouter();
+    const [name, setName] = useState(category.name);
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
-        CategoryService.createCategory(
+        await CategoryService.updateCategory(
             {
+                id: category.id,
                 name: name,
             }
         );
-        setName('');
+        category.name = name;
+        router.refresh();
         onClose();
     };
 
@@ -22,7 +27,7 @@ const ModalWindowForCreateCategory = ({ isOpen, onClose }: { isOpen: boolean, on
     return (
         <ModalWindowlayout onClose={onClose}>
             <h3 className="text-lg leading-6 font-medium text-white" id="modal-title">
-                Enter category's name
+                Update category
             </h3>
             <div className="mt-2">
                 <form onSubmit={handleSubmit}>
@@ -47,4 +52,4 @@ const ModalWindowForCreateCategory = ({ isOpen, onClose }: { isOpen: boolean, on
     );
 };
 
-export default ModalWindowForCreateCategory;
+export default ModalWindowForUpdateCategory;
