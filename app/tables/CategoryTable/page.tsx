@@ -25,12 +25,12 @@ import UpdateCategoryButton from "./Buttons/UpdateCategoryButton"
 const listOfColumn: ComboxProps = {
     listOfValue: [
         {
-            label: "id",
-            value: "id",
+            label: "Id",
+            value: "Id",
         },
         {
-            label: "name",
-            value: "name",
+            label: "Name",
+            value: "Name",
         }
     ],
     placeholder: "select column",

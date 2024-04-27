@@ -27,24 +27,24 @@ import UserService from "@/services/UserService"
 const listOfColumn: ComboxProps = {
     listOfValue: [
         {
-            label: "id",
-            value: "id",
+            label: "Id",
+            value: "Id",
         },
         {
-            label: "username",
-            value: "username",
+            label: "Username",
+            value: "Username",
         },
         {
-            label: "gmail",
-            value: "gmail",
+            label: "Gmail",
+            value: "Gmail",
         },
         {
-            label: "isVerify",
-            value: "isVerify",
+            label: "IsVerify",
+            value: "IsVerify",
         },
         {
-            label: "role",
-            value: "role",
+            label: "Role",
+            value: "Role",
         }
     ],
     placeholder: "select column",

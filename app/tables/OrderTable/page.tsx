@@ -25,24 +25,24 @@ import DeleteOrderButton from "./Buttons/DeleteOrderButton"
 const listOfColumn: ComboxProps = {
     listOfValue: [
         {
-            label: "id",
-            value: "id",
+            label: "Id",
+            value: "Id",
         },
         {
-            label: "userId",
-            value: "userId",
+            label: "UserId",
+            value: "UserId",
         },
         {
-            label: "cost",
-            value: "cost",
+            label: "Cost",
+            value: "Cost",
         },
         {
-            label: "dateTime",
-            value: "dateTime",
+            label: "DateTime",
+            value: "DateTime",
         },
         {
-            label: "phoneNumber",
-            value: "phoneNumber",
+            label: "PhoneNumber",
+            value: "PhoneNumber",
         }
     ],
     placeholder: "select column",
@@ -120,7 +120,7 @@ export default async function Page({ searchParams }: { searchParams: FilterPagin
                         {page.orders.map((order) => (
                             <TableRow key={order.id} className="grid-cols-3" >
                                 <TableCell className="text-center" >{order.id}</TableCell>
-                                <TableCell className="text-center" >{order?.user.id}</TableCell>
+                                <TableCell className="text-center" >{order?.user?.id || "user isn't registered"}</TableCell>
                                 <TableCell className="text-center" >{order.cost}</TableCell>
                                 <TableCell className="text-center" >{order.phoneNumber}</TableCell>
                                 <TableCell className="text-center" >{String(order.dateTime)}</TableCell>

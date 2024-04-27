@@ -27,20 +27,24 @@ import DeleteDishButton from "./Buttons/DeleteDishButton"
 const listOfColumn: ComboxProps = {
     listOfValue: [
         {
-            label: "id",
-            value: "id",
+            label: "Id",
+            value: "Id",
         },
         {
-            label: "name",
-            value: "name",
+            label: "Name",
+            value: "Name",
         },
         {
-            label: "description",
-            value: "description",
+            label: "Description",
+            value: "Description",
         },
         {
-            label: "cost",
-            value: "cost",
+            label: "Category",
+            value: "Category",
+        },
+        {
+            label: "Cost",
+            value: "Cost",
         },
     ],
     placeholder: "select column",
