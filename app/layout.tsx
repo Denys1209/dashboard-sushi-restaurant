@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <MySessionProvider>
       <ProtectedLayout>
-        <html lang="en" className="w-full h-[100vh]">
+        <html lang="en" className="w-full h-[100vh] bg-black">
           <body className="w-full h-[100vh]">
             <DashboardLayout>
               <div className={inter.className}>{children}</div>

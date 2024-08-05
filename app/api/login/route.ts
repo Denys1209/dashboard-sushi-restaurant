@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import UserService from "@/services/UserService";
 import { LoginResponse, LoginUserDto } from "@/types/User";
-import { signJwtAccessToken } from '@/lib/utils';
+import { signJwtAccessToken } from '@/lib/jwtTokenUtils';
 
 // Define the POST handler for the login route
 export async function POST(body: Request) {
